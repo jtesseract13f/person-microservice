@@ -20,4 +20,4 @@ jobs:
       - name: Build
         run: dotnet build src/PersonMinimalApi.csproj --configuration Release --no-restore
       - name: Test
-        run: dotnet test src/Tests.csproj --no-build --logger "console;verbosity=normal"
+        run: dotnet test src/Tests/Tests.csproj --no-build --logger "console;verbosity=normal"

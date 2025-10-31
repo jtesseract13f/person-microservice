@@ -13,6 +13,12 @@ COPY . .
 WORKDIR "/src/src"
 RUN dotnet build "./PersonMinimalApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+# Run unit tests
+FROM build AS test
+WORKDIR /src
+
+RUN dotnet test ./Tests/Tests.csproj --no-build --verbosity normal
+
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./PersonMinimalApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false

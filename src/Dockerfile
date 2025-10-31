@@ -17,7 +17,7 @@ RUN dotnet build "./PersonMinimalApi.csproj" -c $BUILD_CONFIGURATION -o /app/bui
 FROM build AS test
 WORKDIR /src
 
-RUN dotnet test ./Tests/Tests.csproj --no-build --verbosity normal
+RUN dotnet test ./Tests/Tests.csproj --no-build --verbosity detailed
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release

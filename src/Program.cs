@@ -63,7 +63,8 @@ apiV1.MapPost("/persons", async (PersonRequest request, PersonService service) =
 apiV1.MapPatch("/persons/{personId}", async (int personId, PersonPatchRequest patch, PersonService service) =>
     {
         var res = await service.Update(personId, patch);
-        if  (res != null) return Results.Ok(res);
+        var entity = await service.GetById(personId);
+        if  (res != null) return Results.Ok(entity);
         return Results.NotFound();
     })
     .WithName("UpdatePerson")

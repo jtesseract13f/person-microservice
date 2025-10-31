@@ -7,10 +7,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/PersonMinimalApi.csproj", "PersonMinimalApi/"]
+COPY ["src/PersonMinimalApi.csproj", "src/"]
 RUN dotnet restore "src/PersonMinimalApi.csproj"
 COPY . .
-WORKDIR "/src/PersonMinimalApi"
+WORKDIR "/src/src"
 RUN dotnet build "./PersonMinimalApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

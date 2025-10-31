@@ -1,0 +1,23 @@
+# .github/workflows/test.yml
+name: Run tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore src/PersonMinimalApi.csproj
+      - name: Build
+        run: dotnet build src/PersonMinimalApi.csproj --configuration Release --no-restore
+      - name: Test
+        run: dotnet test src/Tests.csproj --no-build --logger "console;verbosity=normal"

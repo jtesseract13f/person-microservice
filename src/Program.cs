@@ -55,7 +55,7 @@ apiV1.MapGet("/persons", (PersonService service) => service.GetAll())
 apiV1.MapPost("/persons", async (PersonRequest request, PersonService service) =>
     {
         var res = await service.Create(request);
-        return Results.Created("/persons/{person.Id}", res);;
+        return Results.Created($"/persons/{res}", res);
     })
     .WithName("CreatePerson")
     .WithOpenApi();
